@@ -13,22 +13,27 @@
         <th>Age</th>
         <th>Edit</th>
         <th>Delete</th>
+        <th>Roles</th>
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.getId()}"></td>
         <td th:text="${user.getUsername()}"></td>
         <td th:text="${user.getAge()}"></td>
-        <td th:each="role : ${user.getRoles()}" th:text="role.name"></td>
         <td><a th:href="@{/admin/edit?id={id}(id=${user.getId()})}">Edit</a></td>
         <td>
             <form th:method="POST" th:action="@{/admin/remove?id={id}(id=${user.getId()})}">
                 <input type="submit" value="Delete">
             </form>
         </td>
+        <td th:each="role : ${user.getRoles()}" th:text="${role.getName()}"></td>
         </br>
     </tr>
 </table>
 <br/>
-<a href="users/new">Create new person</a>
+<a href="/admin/new">Create new person</a>
+<br/>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>

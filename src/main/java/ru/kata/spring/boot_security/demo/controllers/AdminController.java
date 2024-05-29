@@ -43,14 +43,14 @@ public class AdminController {
     @GetMapping("/edit")
     public String editUser(@RequestParam("id") Long id, Model model) {
         System.out.println("id = " + id);
-        model.addAttribute(userService.getUser(id));
+        model.addAttribute("user", userService.getUser(id));
         return "admin/edit";
     }
 
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.update(user);
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 
     @PostMapping("/remove")

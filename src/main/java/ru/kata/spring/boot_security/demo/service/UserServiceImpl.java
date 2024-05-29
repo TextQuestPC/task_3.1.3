@@ -1,10 +1,13 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.security.SecurityUserDetails;
 
 import java.util.List;
 
@@ -20,6 +23,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(Long id) {
         return userDao.getUser(id);
+    }
+    
+    @Override
+    public User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return ((SecurityUserDetails) authentication.getPrincipal()).getUser();
     }
 
     @Transactional

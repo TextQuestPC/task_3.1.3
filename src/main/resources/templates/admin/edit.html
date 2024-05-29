@@ -5,19 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-
 EDIT
-<!--<form th:method="POST" th:action="@{/users}" th:object="${user}">-->
-<!--    <label for="id">ID: </label>-->
-<!--    <input type="text" th:field="*{id}" id="id"/>-->
-<!--    <br/>-->
-<!--    <label for="name">Enter new name: </label>-->
-<!--    <input type="text" th:field="*{username}" id="name"/>-->
-<!--    <br/>-->
-<!--    <label for="age">Enter new age: </label>-->
-<!--    <input type="text" th:field="*{age}" id="age"/>-->
-<!--    <br/>-->
-<!--    <input type="submit" value="Update">-->
-<!--</form>-->
+<form th:method="POST" th:action="@{/admin/update}" th:object="${user}">
+    <label for="id">ID: </label>
+    <input type="text" th:field="*{id}" id="id"/>
+    <br/>
+    <label for="username">Enter new name: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <br/>
+    <label for="age">Enter new age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <br/>
+    <label for="email">Enter new email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <br/>
+    <label for="password">Enter new password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/>
+    <input type="submit" value="Update">
+</form>
+<br/>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>

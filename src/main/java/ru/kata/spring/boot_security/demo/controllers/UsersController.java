@@ -18,7 +18,11 @@ public class UsersController {
 
     @GetMapping("/user")
     public String index(Model model) {
-        model.addAttribute("users", userService.getAll());
+        System.out.println("INDEX");
+        
+        User user = userService.getUser();
+        System.out.println("user = " + user);
+        model.addAttribute("user", user );        
         return "user";
     }   
 }
