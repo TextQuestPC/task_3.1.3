@@ -12,8 +12,8 @@ public class User {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
-    private String name;
+    @Column(name = "username")
+    private String username;
     @Column(name = "age")
     private int age;
     @Column(name = "email")
@@ -29,7 +29,7 @@ public class User {
     }
 
     public User(String name, int age, String email) {
-        this.name = name;
+        this.username = name;
         this.age = age;
         this.email = email;
     }
@@ -42,12 +42,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String name) {
+        this.username = name;
     }
 
     public int getAge() {
@@ -84,6 +84,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", age=" + age + ", email=" + email + "]";
+        return "User [id=" + id + ", name=" + username + ", age=" + age + ", email=" + email + "]";
     }
 }

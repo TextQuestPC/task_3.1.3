@@ -8,7 +8,6 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Controller
-@RequestMapping("/users")
 public class UsersController {
     private final UserService userService;
 
@@ -17,15 +16,15 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public String index(Model model) {
         model.addAttribute("users", userService.getAll());
-        return "users/index";
+        return "user";
     }
 
     @GetMapping("/new")
     public String newUser(@ModelAttribute("user") User user) {
-        return "users/new";
+        return "admin/new";
     }
 
     @PostMapping
@@ -38,7 +37,7 @@ public class UsersController {
     public String editUser(@RequestParam("id") Long id, Model model) {
         System.out.println("id = " + id);
         model.addAttribute(userService.getUser(id));
-        return "users/edit";
+        return "admin/edit";
     }
 
     @PostMapping("/update")
