@@ -3,7 +3,7 @@ package ru.kata.spring.boot_security.demo.models;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

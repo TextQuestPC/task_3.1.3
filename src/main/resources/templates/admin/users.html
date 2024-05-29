@@ -10,18 +10,18 @@
     <tr>
         <th>id</th>
         <th>Name</th>
-        <th>Surname</th>
         <th>Age</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <tr th:each="user: ${users}">
+    <tr th:each="user : ${users}">
         <td th:text="${user.getId()}"></td>
-        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getUsername()}"></td>
         <td th:text="${user.getAge()}"></td>
-        <td><a th:href="@{users/edit?id={id}(id=${user.getId()})}">Edit</a></td>
+        <td th:each="role : ${user.getRoles()}" th:text="role.name"></td>
+        <td><a th:href="@{/admin/edit?id={id}(id=${user.getId()})}">Edit</a></td>
         <td>
-            <form th:method="POST" th:action="@{/users/remove?id={id}(id=${user.getId()})}">
+            <form th:method="POST" th:action="@{/admin/remove?id={id}(id=${user.getId()})}">
                 <input type="submit" value="Delete">
             </form>
         </td>

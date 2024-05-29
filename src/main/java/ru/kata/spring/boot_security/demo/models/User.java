@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -22,7 +22,8 @@ public class User {
     private String password;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
     public User() {
@@ -73,13 +74,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(List<Role> role) {
+        this.roles = role;
     }
 
     @Override
