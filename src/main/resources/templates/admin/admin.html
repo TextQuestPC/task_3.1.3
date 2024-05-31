@@ -2,10 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Admin page</title>
 </head>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <p class="navbar-brand mb-0 h1">
+                <span class="align-middle font-weight-bold" th:text="${user.getUsername()}"></span>
+                <span class="align-middle">with roles:</span>
+                <span class="align-middle" th:each="role : ${user.getRoles()}" th:text="${role.getName()} + ' '"></span>
+            </p>
+            <form th:method="POST" th:action="@{/logout}">
+                <button type="submit" value="Logout" class="btn btn-dark nav-item text-secondary">Logout</button>
+            </form>
+        </div>
+    </nav>
+</header>
 <body>
+<div class="row">
+    <div class="col-md-2 d-none d-md-block sidebar">
+        <div class="sidebar-sticky">
+            <div class="nav flex-column">
+                <button class="nav-item btn btn-primary text-left" aria-selected="true" th:href="@{/admin/admin}">
+                    Admin
+                </button>
+                <button class="nav-item btn text-primary text-left" th:href="@{/user}">User</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="tab-context bg-light">
+            <div class="h1 bold">Admin panel</div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Roles</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getUsername()}"></td>
+                    <td th:text="${user.getAge()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td>
+                        <ul>
+                            <li th:each="role : ${user.getRoles()}" th:text="${role.getName()}"></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--<div class="d-flex align-items-start">-->
+<!--    <div class="col-2">-->
+<!--        <div class="nav flex-column nav-pills">-->
+<!--            <a>Admin</a>-->
+<!--            <a>User</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-10">-->
+<!--        <div></div>-->
+<!--    </div>-->
+<!--</div>-->
 <h1>Users:</h1>
 <table>
     <tr>
@@ -33,12 +102,16 @@
 <br/>
 <a href="/admin/new">Create new person</a>
 <br/>
-<form th:method="POST" th:action="@{/logout}">
-    <input type="submit" value="Logout"/>
-</form>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

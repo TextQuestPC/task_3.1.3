@@ -30,6 +30,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String allUsers(Model model) {
+        model.addAttribute("user", userService.getUser());
         model.addAttribute("users", userService.getAll());
         return "admin/admin";
     }
