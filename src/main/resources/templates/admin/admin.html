@@ -2,13 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Admin page</title>
 </head>
 <body>
-
+<h1>Users:</h1>
+<table>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Roles</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getAge()}"></td>
+        <td><a th:href="@{/admin/edit?id={id}(id=${user.getId()})}">Edit</a></td>
+        <td>
+            <form th:method="POST" th:action="@{/admin/remove?id={id}(id=${user.getId()})}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+        <td th:each="role : ${user.getRoles()}" th:text="${role.getName()}"></td>
+        </br>
+    </tr>
+</table>
+<br/>
+<a href="/admin/new">Create new person</a>
 <br/>
 <form th:method="POST" th:action="@{/logout}">
     <input type="submit" value="Logout"/>
 </form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
