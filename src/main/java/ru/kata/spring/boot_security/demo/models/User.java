@@ -21,9 +21,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
     public User() {
@@ -79,6 +77,14 @@ public class User {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public String getNameRoles() {
+        StringBuilder sb = new StringBuilder();
+        for (Role role : roles) {
+            sb.append(role.getName()).append(" ");
+        }
+        return sb.toString();
     }
 
     public void setRole(List<Role> role) {
