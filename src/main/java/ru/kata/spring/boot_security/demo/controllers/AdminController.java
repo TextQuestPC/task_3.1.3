@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,14 +45,17 @@ public class AdminController {
 
     @PostMapping
     public String createNewUser(@ModelAttribute("user") User user,
-                                @RequestParam("selectedRoles") Long[] selectRoles,
+                                @RequestParam("selectedRoles") List<Integer> selectRoles,
                                 BindingResult result) {
 
         if (!result.hasErrors()) {
-            System.out.println(Arrays.stream(selectRoles));
+            List<Role> roles = new ArrayList<>();
+            for (int roleId : selectRoles) {
+                roles.add(roleService.getRoleById(roleId));
+            }
+            
+            user.setRole(roles);
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-            System.out.println("password = " + user.getPassword());
-            System.out.println("role = " + user.getNameRoles());
             userService.save(user);
         }
         return "redirect:/admin/admin";
@@ -65,8 +69,18 @@ public class AdminController {
     }
 
     @PostMapping("/update")
-    public String updateUser(@ModelAttribute("user") User user) {
-        userService.update(user);
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam("selectedRoles") List<Integer> selectRoles,
+                             BindingResult result) {
+        if (!result.hasErrors()) {
+            List<Role> roles = new ArrayList<>();
+            for (int roleId : selectRoles) {
+                roles.add(roleService.getRoleById(roleId));
+            }
+            user.setRole(roles);
+            System.out.println("PASSWORD = " + user.getPassword());
+            userService.update(user);
+        }
         return "redirect:/admin/admin";
     }
 

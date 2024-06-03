@@ -23,7 +23,7 @@
     </nav>
 </header>
 <body>
-<div class="d-flex align-items-start">
+<div class="d-flex align-items-start" style="height: 100vh">
 
     <div class="col-2 sidebar">
         <div class="nav flex-column">
@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="col-10 bg-light">
+    <div class="col-10 bg-light" style="height: 100vh">
         <div class="container-fluid">
             <div class="h1 bold">Admin panel</div>
 
@@ -52,7 +52,7 @@
             </nav>
 
             <div class="tab-content">
-                
+
                 <!--ALL_USERS-->
                 <div class="tab-pane fade show active" id="users-table-panel" role="tab"
                      aria-labelledby="users-table-tab">
@@ -105,7 +105,7 @@
                                                       th:object="${user}">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="editModalLabel">Edit
+                                                            <h5 class="modal-title mb-0" id="editModalLabel">Edit
                                                                 user</h5>
                                                             <button type="button" class="close"
                                                                     data-dismiss="modal"
@@ -113,11 +113,10 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-
-
-                                                            <div class="form-group">
-                                                                <label for="exampleInputID">ID</label>
+                                                        <div class="modal-body" style="margin-bottom: 30px;">
+                                                            
+                                                            <div class="form-group col-6 m-auto p-md-1">
+                                                                <h6 class="mb-0 text-center" for="exampleInputID">ID</h6>
                                                                 <input name="id" disabled="true" type="text"
                                                                        th:value="*{id}"
                                                                        class="form-control form-control-sm"
@@ -125,8 +124,8 @@
                                                                        aria-describedby="IDHelp"
                                                                        placeholder="Enter ID">
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="username">Username</label>
+                                                            <div class="form-group col-6 m-auto p-md-1" style="margin-bottom: 50px;">
+                                                                <h6 class="mb-0 text-center" for="username">Username</h6>
                                                                 <input name="username" type="text"
                                                                        th:value="*{username}"
                                                                        class="form-control form-control-sm"
@@ -137,8 +136,8 @@
                                                                      th:errors="*{username}">Name error
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="age">Age</label>
+                                                            <div class="form-group col-6 m-auto p-md-1">
+                                                                <h6 class="mb-0 text-center" for="age">Age</h6>
                                                                 <input name="age" type="text" th:value="*{age}"
                                                                        class="form-control form-control-sm"
                                                                        id="age"
@@ -149,8 +148,8 @@
                                                                      th:errors="*{age}">Age error
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="email">Email</label>
+                                                            <div class="form-group col-6 m-auto p-md-1">
+                                                                <h6 class="mb-0 text-center" for="email">Email</h6>
                                                                 <input name="email" type="text"
                                                                        th:value="*{email}"
                                                                        class="form-control form-control-sm"
@@ -162,10 +161,9 @@
                                                                      th:errors="*{email}">Email error
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="password">Password</label>
+                                                            <div class="form-group col-6 m-auto p-md-1">
+                                                                <h6 class="mb-0 text-center" for="password">Password</h6>
                                                                 <input name="password" type="text"
-                                                                       th:value="*{password}"
                                                                        class="form-control form-control-sm"
                                                                        id="password"
                                                                        aria-describedby="passwordHelp"
@@ -175,19 +173,18 @@
                                                                      th:errors="*{password}">Password error
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label>Role</label>
-                                                                <br/>
-                                                                <label>
-                                                                    <input type="checkbox" name="roleAdmin"
-                                                                           th:value="ADMIN" th:text="Admin">
-                                                                </label>
-                                                                <label>
-                                                                    <input type="checkbox" name="roleUser"
-                                                                           checked="checked" th:value="USER"
-                                                                           th:text="User">
-                                                                </label>
+                                                            <div class="form-group col-6 m-auto">
+                                                                <h6 class="mb-0 text-center">Role</h6>
+                                                                <select class="form-select text-center" multiple
+                                                                        style="height: 50px" name="selectedRoles">
+                                                                    <option th:each="role : ${allRoles}"
+                                                                            th:id="${role.id}"
+                                                                            th:text="${role.getName()}"
+                                                                            th:value="${role.getId()}">
+                                                                    </option>
+                                                                </select>
                                                             </div>
+                                                            </br>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                         data-dismiss="modal">Close
@@ -210,7 +207,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                        <h5 class="modal-title mb-0" id="exampleModalLabel">Delete
                                                             user</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
@@ -221,8 +218,8 @@
 
                                                         <form th:method="DELETE"
                                                               th:action="@{/admin/remove?id={id}(id=${user.getId()})}">
-                                                            <div class="form-group">
-                                                                <label for="idDelete">ID</label>
+                                                            <div class="form-group col-5 m-auto p-md-1">
+                                                                <h6 class="mb-0 text-center" for="idDelete">ID</h6>
                                                                 <input disabled="true" th:value="${user.id}"
                                                                        readonly
                                                                        type="email"
@@ -231,47 +228,61 @@
                                                                        aria-describedby="emailHelp"
                                                                        placeholder="Enter ID">
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="usernameDelete">Username</label>
+                                                            <div class="form-group col-5 m-auto p-md-1">
+                                                                <h6 for="usernameDelete" class="mb-0 text-center">
+                                                                    Username</h6>
                                                                 <input disabled="true"
                                                                        th:value="${user.username}"
                                                                        readonly type="text"
-                                                                       class="form-control form-control-sm"
+                                                                       class="form-control form-control-sm mb-0"
                                                                        id="usernameDelete"
                                                                        placeholder="Username">
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="ageDelete">Age</label>
+                                                            <div class="form-group col-5 m-auto p-md-1">
+                                                                <h6 for="ageDelete" class="mb-0 text-center">Age</h6>
                                                                 <input disabled="true" th:value="${user.age}"
                                                                        type="email"
-                                                                       class="form-control form-control-sm"
+                                                                       class="form-control form-control-sm mb-0"
                                                                        id="ageDelete"
                                                                        aria-describedby="emailHelp"
                                                                        placeholder="Enter email">
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="emailDelete">Email</label>
+                                                            <div class="form-group form-group col-5 m-auto p-md-1">
+                                                                <h6 for="emailDelete" class="mb-0 text-center">
+                                                                    Email</h6>
                                                                 <input disabled="true" th:value="${user.email}"
                                                                        type="email"
-                                                                       class="form-control form-control-sm"
+                                                                       class="form-control form-control-sm mb-0"
                                                                        id="emailDelete"
                                                                        aria-describedby="emailHelp"
                                                                        placeholder="Enter email">
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="roleDelete">Role</label>
-                                                                <select disabled="true" multiple
-                                                                        class="form-control form-control-sm"
-                                                                        id="roleDelete">
-                                                                    <option name="roleAdmin"
-                                                                            th:checked="${ADMIN}"
-                                                                            th:value="ADMIN">ADMIN
-                                                                    </option>
-                                                                    <option name="roleUser" th:checked="${USER}"
-                                                                            th:value="USER">USER
+                                                            <div class="form-group col-5 mx-auto py-md-10" style="margin: 12px">
+                                                                <h6 class="form-label mb-0 text-center">Role</h6>
+                                                                <select disabled="true" class="form-select text-center"
+                                                                        multiple
+                                                                        style="height: 50px" name="selectedRoles">
+                                                                    <option th:each="role : ${allRoles}"
+                                                                            th:id="${role.id}"
+                                                                            th:text="${role.getName()}"
+                                                                            th:value="${role.getId()}">
                                                                     </option>
                                                                 </select>
                                                             </div>
+                                                            <!--                                                            <div class="form-group form-group col-5 m-auto p-md-1">-->
+                                                            <!--                                                                <label for="roleDelete" style="font-size: 15px">Role</label>-->
+                                                            <!--                                                                <select disabled="true" multiple-->
+                                                            <!--                                                                        class="form-control form-control-sm"-->
+                                                            <!--                                                                        id="roleDelete">-->
+                                                            <!--                                                                    <option name="roleAdmin"-->
+                                                            <!--                                                                            th:checked="${ADMIN}"-->
+                                                            <!--                                                                            th:value="ADMIN">ADMIN-->
+                                                            <!--                                                                    </option>-->
+                                                            <!--                                                                    <option name="roleUser" th:checked="${USER}"-->
+                                                            <!--                                                                            th:value="USER">USER-->
+                                                            <!--                                                                    </option>-->
+                                                            <!--                                                                </select>-->
+                                                            <!--                                                            </div>-->
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                         data-dismiss="modal">Close
@@ -295,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!--NEW_USER-->
                 <div class="tab-pane fade" id="new-users-panel" role="tabpanel" aria-labelledby="new-users-tab">
                     <div class="card">
@@ -331,11 +342,12 @@
                                     </div>
                                     <div class="form-group col-3 mx-auto">
                                         <h6 class="form-label mb-0">Role</h6>
-                                        <select class="form-select text-center" th:field="*{roles}" multiple 
+                                        <select class="form-select text-center" multiple
                                                 style="height: 50px" name="selectedRoles">
                                             <option th:each="role : ${allRoles}"
+                                                    th:id="${role.id}"
                                                     th:text="${role.getName()}"
-                                                    th:value="${role.id}">
+                                                    th:value="${role.getId()}">
                                             </option>
                                         </select>
                                     </div>
