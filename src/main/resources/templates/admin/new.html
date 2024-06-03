@@ -25,7 +25,7 @@
         <option th:each="role : ${allRoles}"
                 th:field="*{roles}"
                 th:value="${role.id}"
-                th:text="${role.name}">Role name
+                th:text="${role.getNameForView}">Role name
         </option>
     </select>
     <br/>

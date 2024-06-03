@@ -14,7 +14,7 @@
             <p class="navbar-brand mb-0 h1">
                 <span class="align-middle font-weight-bold" th:text="${user.getUsername()}"></span>
                 <span class="align-middle">with roles:</span>
-                <span class="align-middle" th:each="role : ${user.getRoles()}" th:text="${role.getName()} + ' '"></span>
+                <span class="align-middle" th:each="role : ${user.getRoles()}" th:text="${role.getNameForView()} + ' '"></span>
             </p>
             <form th:method="POST" th:action="@{/logout}">
                 <button type="submit" value="Logout" class="btn btn-dark nav-item text-secondary">Logout</button>
@@ -179,7 +179,7 @@
                                                                         style="height: 50px" name="selectedRoles">
                                                                     <option th:each="role : ${allRoles}"
                                                                             th:id="${role.id}"
-                                                                            th:text="${role.getName()}"
+                                                                            th:text="${role.getNameForView()}"
                                                                             th:value="${role.getId()}">
                                                                     </option>
                                                                 </select>
@@ -262,9 +262,9 @@
                                                                 <select disabled="true" class="form-select text-center"
                                                                         multiple
                                                                         style="height: 50px" name="selectedRoles">
-                                                                    <option th:each="role : ${allRoles}"
+                                                                    <option th:each="role : ${user.getRoles()}"
                                                                             th:id="${role.id}"
-                                                                            th:text="${role.getName()}"
+                                                                            th:text="${role.getNameForView()}"
                                                                             th:value="${role.getId()}">
                                                                     </option>
                                                                 </select>
@@ -346,7 +346,7 @@
                                                 style="height: 50px" name="selectedRoles">
                                             <option th:each="role : ${allRoles}"
                                                     th:id="${role.id}"
-                                                    th:text="${role.getName()}"
+                                                    th:text="${role.getNameForView()}"
                                                     th:value="${role.getId()}">
                                             </option>
                                         </select>

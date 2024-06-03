@@ -82,7 +82,7 @@ public class User {
     public String getNameRoles() {
         StringBuilder sb = new StringBuilder();
         for (Role role : roles) {
-            sb.append(role.getName()).append(" ");
+            sb.append(role.getNameForView()).append(" ");
         }
         return sb.toString();
     }

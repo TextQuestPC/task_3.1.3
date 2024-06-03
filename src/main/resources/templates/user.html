@@ -14,7 +14,7 @@
             <p class="navbar-brand mb-0 h1">
                 <span class="align-middle font-weight-bold" th:text="${user.getUsername()}"></span>
                 <span class="align-middle">with roles:</span>
-                <span class="align-middle" th:each="role : ${user.getRoles()}" th:text="${role.getName()} + ' '"></span>
+                <span class="align-middle" th:each="role : ${user.getRoles()}" th:text="${role.getNameForView()} + ' '"></span>
             </p>
             <form th:method="POST" th:action="@{/logout}">
                 <button type="submit" value="Logout" class="btn btn-dark nav-item text-secondary">Logout</button>
@@ -41,7 +41,7 @@
                      aria-labelledby="users-table-tab">
                     <div class="card">
                         <div class="card-header">
-                            <h3>All users</h3>
+                            <h3>About user</h3>
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">

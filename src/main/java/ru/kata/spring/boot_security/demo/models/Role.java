@@ -32,6 +32,10 @@ public class Role {
     public String getName() {
         return name;
     }
+    
+    public String getNameForView(){
+        return name.substring(name.indexOf("_") + 1);
+    }    
 
     public void setName(String name) {
         this.name = name;
