@@ -7,7 +7,7 @@
     <title>Create user page</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/admin}" th:object="${user}">
+<form th:method="POST" th:action="@{/templates/admin}" th:object="${user}">
     <label for="username">Enter name: </label>
     <input type="text" th:field="*{username}" id="username"/>
     <br/>

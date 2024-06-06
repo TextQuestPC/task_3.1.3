@@ -79,12 +79,18 @@ public class User {
         return roles;
     }
 
-    public String getNameRoles() {
-        StringBuilder sb = new StringBuilder();
+    public List<String> getNameRoles() {
+        List<String> rolesNames = new ArrayList<>();
         for (Role role : roles) {
-            sb.append(role.getNameForView()).append(" ");
+            rolesNames.add(role.getNameForView());
         }
-        return sb.toString();
+        return rolesNames;
+
+//        StringBuilder sb = new StringBuilder();
+//        for (Role role : roles) {
+//            sb.append(role.getNameForView()).append(" ");
+//        }
+//        return sb.toString();
     }
 
     public void setRole(List<Role> role) {
