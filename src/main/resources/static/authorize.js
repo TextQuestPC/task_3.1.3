@@ -23,7 +23,7 @@ function authorization() {
 }
 
 function listRoles(user) {
-    let roles = "";
+    let roles = "";    
     for (let i = 0; i < user.roles.length; i++) {
         let role = user.roles[i].name;
         roles += " " + role.substring(role.indexOf("_") + 1);

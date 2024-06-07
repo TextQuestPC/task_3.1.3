@@ -22,8 +22,7 @@ function showModalDelete(id) {
                             </div>
                             <div class="modal-body">
 
-                                <form th:method="DELETE"
-                                      th:action="@{/admin/remove?id={id}(id=${user.id})}">
+                                <form>
                                     <div class="form-group col-5 m-auto p-md-1">
                                         <h6 class="mb-0 text-center" for="idDelete">ID</h6>
                                         <input disabled="true"
@@ -32,7 +31,7 @@ function showModalDelete(id) {
                                                class="form-control form-control-sm"
                                                id="idDelete"
                                                aria-describedby="emailHelp"
-                                               value="`+ user.id + `">
+                                               value="` + user.id + `">
                                     </div>
                                     <div class="form-group col-5 m-auto p-md-1">
                                         <h6 for="usernameDelete" class="mb-0 text-center">
@@ -41,7 +40,7 @@ function showModalDelete(id) {
                                                readonly type="text"
                                                class="form-control form-control-sm mb-0"
                                                id="usernameDelete"
-                                               value="`+ user.username + `">
+                                               value="` + user.username + `">
                                     </div>
                                     <div class="form-group col-5 m-auto p-md-1">
                                         <h6 for="ageDelete" class="mb-0 text-center">
@@ -51,7 +50,7 @@ function showModalDelete(id) {
                                                class="form-control form-control-sm mb-0"
                                                id="ageDelete"
                                                aria-describedby="emailHelp"
-                                               value="`+ user.age + `">
+                                               value="` + user.age + `">
                                     </div>
                                     <div class="form-group form-group col-5 m-auto p-md-1">
                                         <h6 for="emailDelete" class="mb-0 text-center">
@@ -61,7 +60,7 @@ function showModalDelete(id) {
                                                class="form-control form-control-sm mb-0"
                                                id="emailDelete"
                                                aria-describedby="emailHelp"
-                                               value="`+ user.email + `">
+                                               value="` + user.email + `">
                                     </div>
                                     <div class="form-group col-5 mx-auto py-md-10"
                                          style="margin: 12px">
@@ -72,16 +71,15 @@ function showModalDelete(id) {
                                                 style="height: 50px" name="selectedRoles">
                                         </select>
                                     </div>
-
-                                    <div class="modal-footer">
+                                </form>
+                                <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close
                                         </button>
-                                        <button type="submit" class="btn btn-danger">
+                                        <button onclick="deleteUser(` + user.id + `)" type="submit" class="btn btn-danger">
                                             Delete
                                         </button>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,5 +106,6 @@ function deleteUser(id) {
     })
         .then(response => {
             $('#' + id).remove();
+            $("#modal-delete").modal('hide');
         });
 }
