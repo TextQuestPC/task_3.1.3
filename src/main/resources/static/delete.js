@@ -65,7 +65,7 @@ function showModalDelete(id) {
                                     <div class="form-group col-5 mx-auto py-md-10"
                                          style="margin: 12px">
                                         <h6 class="form-label mb-0 text-center">Role</h6>
-                                        <select id="delete-roles" disabled="true"
+                                        <select id="roles-in-form" disabled="true"
                                                 class="form-select text-center"
                                                 multiple
                                                 style="height: 50px" name="selectedRoles">
@@ -85,15 +85,7 @@ function showModalDelete(id) {
                     </div>
                 </div>`;
 
-            let deleteRoles = document.getElementById("delete-roles");
-            deleteRoles.innerHTML = "";
-
-            user.roles.forEach(role => {
-                let option = document.createElement("option");
-                option.value = role.id;
-                option.text = role.name.toString().replace('ROLE_', '');
-                deleteRoles.appendChild(option);
-            });
+            createRolesUser(user);
 
             $("#modal-delete").modal('show');
         });

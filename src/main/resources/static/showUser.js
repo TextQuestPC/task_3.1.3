@@ -1,6 +1,4 @@
 function showUser() {
-
-
     fetch("http://localhost:8080/getUser")
         .then(response => response.json())
         .then(user => {
@@ -18,5 +16,6 @@ function showUser() {
             cell_email.innerHTML = user.email;
             let cell_roles = row.insertCell(4);
             cell_roles.innerHTML = listRoles(user);
+            
         });
 }

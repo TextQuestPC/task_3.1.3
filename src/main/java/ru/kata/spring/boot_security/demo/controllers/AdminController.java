@@ -28,9 +28,9 @@ public class AdminController {
     public ResponseEntity<?> getAuthorizationUser() {
         return new ResponseEntity<>(userService.getUser(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/getAllRoles")
-    public ResponseEntity<List<Role>> getAllRoles(){
+    public ResponseEntity<List<Role>> getAllRoles() {
         return new ResponseEntity<>(roleService.getRoles(), HttpStatus.OK);
     }
 
@@ -67,72 +67,16 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PatchMapping("/edit")
+    public ResponseEntity<?> editUser(@RequestBody User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        userService.update(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         userService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-//    @GetMapping("/new")
-//    public String newUser(Model model) {
-//        model.addAttribute("user", new User());
-//        model.addAttribute("allRoles", roleService.getRoles());
-//        return "admin/new";
-//    }
-//
-//    @GetMapping("/admin")
-//    public String allUsers(Model model) {
-//        model.addAttribute("user", userService.getUser());
-//        model.addAttribute("users", userService.getAll());
-//        model.addAttribute("allRoles", roleService.getRoles());
-//        return "admin/main";
-//    }
-//
-//    @PostMapping
-//    public String createNewUser(@ModelAttribute("user") User user,
-//                                @RequestParam("selectedRoles") List<Integer> selectRoles,
-//                                BindingResult result) {
-//
-//        if (!result.hasErrors()) {
-//            List<Role> roles = new ArrayList<>();
-//            for (int roleId : selectRoles) {
-//                roles.add(roleService.getRoleById(roleId));
-//            }
-//
-//            user.setRole(roles);
-//            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-//            userService.save(user);
-//        }
-//        return "redirect:/admin/admin";
-//    }
-//
-//    @GetMapping("/edit")
-//    public String editUser(@RequestParam("id") Long id, Model model) {
-//        System.out.println("id = " + id);
-//        model.addAttribute("user", userService.getUser(id));
-//        return "admin/edit";
-//    }
-//
-//    @PostMapping("/update")
-//    public String updateUser(@ModelAttribute("user") User user,
-//                             @RequestParam("selectedRoles") List<Integer> selectRoles,
-//                             BindingResult result) {
-//        if (!result.hasErrors()) {
-//            List<Role> roles = new ArrayList<>();
-//            for (int roleId : selectRoles) {
-//                roles.add(roleService.getRoleById(roleId));
-//            }
-//            user.setRole(roles);
-//            System.out.println("PASSWORD = " + user.getPassword());
-//            userService.update(user);
-//        }
-//        return "redirect:/admin/admin";
-//    }
-//
-//    @DeleteMapping("/remove")
-//    public String remove(@RequestParam("id") Long id) {
-//        userService.remove(id);
-//        return "redirect:/admin/admin";
-//    }
 }

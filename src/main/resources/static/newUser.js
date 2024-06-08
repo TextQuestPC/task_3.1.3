@@ -1,5 +1,3 @@
-addRolesInForm();
-
 function createNewUser() {
     let form = document.getElementById("create-user-form");
     let formRoles = document.getElementById("all-roles-new");
@@ -17,6 +15,7 @@ function createNewUser() {
 
     fetch('http://localhost:8080/create', {
         method: 'POST',
+        headers: {"Content-type": "application/json; charset=UTF-8"},
         body: JSON.stringify({
             username: form.usernameNew.value,
             age: form.ageNew.value,
@@ -24,7 +23,6 @@ function createNewUser() {
             password: form.passwordNew.value,
             roles: newRoles
         }),
-        headers: {"Content-type": "application/json; charset=UTF-8"}
     })
         .then(response => response.json)
         .then(() => {
@@ -32,20 +30,4 @@ function createNewUser() {
             showAllUsers();
             $('#users-table-tab').click();
         });
-}
-
-function addRolesInForm() {
-    let rolesForm = document.getElementById("all-roles-new");
-
-    fetch('http://localhost:8080/getAllRoles')
-        .then(response => response.json())
-        .then(roles => {
-            roles.forEach(role => {
-                let option = document.createElement("option");
-                option.value = role.id;
-                option.text = role.name.toString().replace('ROLE_', '');
-                rolesForm.appendChild(option);
-            })
-        })
-        .catch(error => console.log(error));
 }

@@ -9,15 +9,17 @@ function authorization() {
 
             if (roles.includes("ADMIN")) {
                 document.getElementById("user-button").classList.add("text-primary");
-                document.getElementById("user-tab").remove();
                 
                 showAllUsers();
             } else {
                 document.getElementById("user-button").classList.add("btn-primary");
+                document.getElementById("user-button").classList.add("text-white");
+                document.getElementById("user-tab").classList.add("active");
                 document.getElementById("admin-button").remove();
                 document.getElementById("admin-tab").remove();
             }
 
+            createAllRoles("all-roles-new");
             showUser();
         });
 }

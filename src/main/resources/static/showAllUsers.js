@@ -22,7 +22,7 @@ function showAllUsers() {
 
                 let cell_edit_button = row.insertCell();
                 cell_edit_button.innerHTML =
-                    '<button type="button" onclick="editUser(' + user.id + ')" class="btn btn-info btn-sm text text-white" data-bs-toggle="modal">Edit</button>';
+                    '<button type="button" onclick="showEditUser(' + user.id + ')" class="btn btn-info btn-sm text text-white" data-bs-toggle="modal">Edit</button>';
 
                 let cell_delete_button = row.insertCell();
                 cell_delete_button.innerHTML =
